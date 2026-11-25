@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <gccore.h>
 #include <string.h>
+#include <wiiuse/wpad.h>
+
+#include "utils.h"
+#include "3rdparty/haxx.h"
+#include "hbc.h"
+#include "3rdparty/runtimeiospatch.h"
 
 static void *xfb = NULL;
 static GXRModeObj *rmode = NULL;
@@ -9,6 +15,8 @@ static GXRModeObj *rmode = NULL;
 void libogc_init( void ) {
 
 	VIDEO_Init();
+	PAD_Init();
+	WPAD_Init();
 
 	rmode = VIDEO_GetPreferredMode(NULL);
 	xfb = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode));
@@ -25,7 +33,23 @@ void libogc_init( void ) {
 
 int main( void ) {
 	libogc_init();
-	printf("hello, openmii");
-	while(1) {}
-		exit(0);
+	CON_EnableGecko(1, true);
+
+	if (!Haxx_GetBusAccess()) {
+		die("Failed to get bus access!");
+	}
+	Restore_Trucha();
+
+	printf("Welcome to the OpenMii Installer\n");
+	printf("waiting for pad");
+	
+	wait_for_pad();
+
+	install_hbc();
+
+	printf("good luck");
+
+	wait_for_pad();
+
+	exit(0);
 }
