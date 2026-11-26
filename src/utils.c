@@ -3,29 +3,49 @@
 #include <wiiuse/wpad.h>
 
 #include "utils.h"
+#include "globals.h"
 
 void die(const char* msg) {
-	printf("Fatal error: %s\n", msg);
-	printf("press any button to exit");
+	CONSOLE_RESET();
+	printf("The OpenMii Installer couldn't continue due to a problem:\n\n%s\n\n", msg);
+	printf("Press any button to return to the Wii Menu.");
 	wait_for_pad();
-	exit(EXIT_FAILURE);
+	WII_ReturnToMenu();
 }
 
 u32 wait_for_pad( void ) {
-	u32 pressed = 0;
+	u32 pressed_g = 0;
 	u32 pressed_w = 0;
 
 	while (1) {
 		WPAD_ScanPads();
 		PAD_ScanPads();
 
-		pressed = PAD_ButtonsDown(0);
+		pressed_g = PAD_ButtonsDown(0);
 		pressed_w = WPAD_ButtonsDown(0);
 
-		if (pressed || pressed_w) break;
+		if (pressed_g || pressed_w) break;
 	}
 
-	if (pressed) return pressed;
+	if ((pressed_g == PAD_BUTTON_A) || (pressed_w == WPAD_BUTTON_A)) {
+	   return BUTTON_A;
+  	}
 
-	return pressed_w;
+	if ((pressed_g == PAD_BUTTON_B) || (pressed_w == WPAD_BUTTON_B)) {
+		return BUTTON_B;
+	}
+
+	if ((pressed_g == PAD_BUTTON_START) || (pressed_w == WPAD_BUTTON_HOME)) {
+		return BUTTON_START;
+	}
+
+	if ((pressed_g == PAD_BUTTON_UP) || (pressed_w == WPAD_BUTTON_UP)) {
+		return BUTTON_UP;
+	}
+
+	if ((pressed_g == PAD_BUTTON_DOWN) || (pressed_w == WPAD_BUTTON_DOWN)) {
+		return BUTTON_DOWN;
+	}
+
+	return BUTTON_UNK;
 }

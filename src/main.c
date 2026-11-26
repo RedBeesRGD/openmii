@@ -11,6 +11,7 @@
 #include "globals.h"
 #include "3rdparty/pngu.h"
 #include "bg.h"
+#include "menu.h"
 
 static void *xfb = NULL;
 static GXRModeObj *rmode = NULL;
@@ -69,6 +70,8 @@ int main( void ) {
 	libogc_init();
 	CON_EnableGecko(1, true);
 
+	printf("\033[0;0H   Patching IOS..");
+
 	IOS_ReloadIOS(IOS_GetVersion()); // clean up from loader
 
 	if (!Haxx_GetBusAccess()) {
@@ -78,18 +81,14 @@ int main( void ) {
 		die("Failed to apply Trucha patches!");
 	}
 
+	CONSOLE_RESET();
+
+	printf("   OpenMii Installer\n\n");
+
 	WPAD_Init(); // WPAD should be initialized after patching, apparently
-
-	printf("Welcome to the OpenMii Installer\n");
-	printf("waiting for pad\n");
 	
-	wait_for_pad();
+	do_main_menu();
 
-	install_hbc();
-
-	printf("good luck");
-
-	wait_for_pad();
-
+	// never reached
 	exit(0);
 }

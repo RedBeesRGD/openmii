@@ -7,7 +7,7 @@ CC=${DEVKITPPC}/bin/powerpc-eabi-gcc
 CFLAGS= -O2 -Wall -Wextra -Iinclude -Idata -I${DEVKITPRO}/libogc2/wii/include -I${DEVKITPRO}/portlibs/ppc/include -DHW_RVL=1
 LDFLAGS= -DGEKKO -mcpu=750 -meabi -mhard-float -L${DEVKITPRO}/libogc2/wii/lib -L${DEVKITPRO}/portlibs/ppc/lib -lpng -lz -lwiiuse -lbte -logc -lm -mrvl
 
-SRC=src/main.c src/utils.c src/3rdparty/haxx.c src/hbc.c src/3rdparty/runtimeiospatch.c src/3rdparty/pngu.c data/bg.c
+SRC=src/main.c src/utils.c src/3rdparty/haxx.c src/hbc.c src/3rdparty/runtimeiospatch.c src/3rdparty/pngu.c data/bg.c src/menu.c src/3rdparty/otp.c
 OBJ := $(patsubst src/%.c,build/%.o,$(SRC))
 
 all: openmii
