@@ -5,7 +5,7 @@
 #include "utils.h"
 
 void die(const char* msg) {
-	printf("%s\n", msg);
+	printf("Fatal error: %s\n", msg);
 	printf("press any button to exit");
 	wait_for_pad();
 	exit(EXIT_FAILURE);

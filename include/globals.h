@@ -1,0 +1,9 @@
+#ifndef _GLOBALS_H_
+#define _GLOBALS_H_
+
+#define CONSOLE_XCOORD	70
+#define CONSOLE_YCOORD	136
+#define CONSOLE_WIDTH	502
+#define CONSOLE_HEIGHT	300
+
+#endif

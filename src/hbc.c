@@ -8,11 +8,11 @@
 #include "hbc.h"
 #include "utils.h"
 
-#include "ohbc_data/hbc_content0.h"
-#include "ohbc_data/hbc_content1.h"
-#include "ohbc_data/hbc_certs.h"
-#include "ohbc_data/hbc_tik.h"
-#include "ohbc_data/hbc_tmd.h"
+#include "ohbc/hbc_content0.h"
+#include "ohbc/hbc_content1.h"
+#include "ohbc/hbc_certs.h"
+#include "ohbc/hbc_tik.h"
+#include "ohbc/hbc_tmd.h"
 
 s8 install_hbc(void) {
 	s32 ret, cfd;
