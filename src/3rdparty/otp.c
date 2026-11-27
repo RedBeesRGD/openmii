@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "otp.h"
+#include "3rdparty/otp.h"
 
 #define HW_OTP_COMMAND  (*(vu32*)0xCD8001EC)
 #define HW_OTP_DATA     (*(vu32*)0xCD8001F0)

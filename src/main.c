@@ -12,6 +12,7 @@
 #include "3rdparty/pngu.h"
 #include "bg.h"
 #include "menu.h"
+#include "tests.h"
 
 static void *xfb = NULL;
 static GXRModeObj *rmode = NULL;
@@ -77,8 +78,11 @@ int main( void ) {
 	if (!Haxx_GetBusAccess()) {
 		die("Failed to get bus access!");
 	}
-	if (!Restore_Trucha()) {
-		die("Failed to apply Trucha patches!");
+
+	if (get_console_type() != CONSOLE_DEVEL) {
+		if (!Restore_Trucha()) {
+			die("Failed to apply Trucha patches!");
+		}
 	}
 
 	CONSOLE_RESET();
