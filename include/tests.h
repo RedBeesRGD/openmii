@@ -5,6 +5,6 @@
 #define CONSOLE_DEVEL 2
 #define CONSOLE_UNK 3
 
-void get_console_type();
+u8 get_console_type();
 
 #endif

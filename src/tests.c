@@ -8,8 +8,9 @@
 #include "utils.h"
 #include "globals.h"
 #include "3rdparty/otp.h"
+#include "tests.h"
 
-void get_console_type() {
+u8 get_console_type() {
 	u8 otp_data[128];
 
 	otp_read(&otp_data, 0x14, 0x10);
